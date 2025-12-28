@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Fetch Example</title>
+</head>
+<body>
+
+<input type="text" id="numberInput" placeholder="Enter 10-digit number" maxlength="10">
+<button onclick="fetchData()">Fetch</button>
+
+<pre id="result"></pre>
+
+<script>
+function fetchData() {
+    const num = document.getElementById("numberInput").value;
+
+    // basic validation
+    if (!/^\d{10}$/.test(num)) {
+        alert("Enter a valid 10-digit number");
+        return;
+    }
+
+    const url = `https://mafia-api.site/api/api.php?key=om1704&num=${num}`;
+
+    fetch(url)
+        .then(response => response.text()) // or .json() if API returns JSON
+        .then(data => {
+            document.getElementById("result").textContent = data;
+        })
+        .catch(error => {
+            console.error(error);
+            document.getElementById("result").textContent = "Error fetching data";
+        });
+}
+</script>
+
+</body>
+</html>
